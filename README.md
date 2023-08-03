@@ -1,4 +1,5 @@
-![](https://komarev.com/ghpvc/?username=aerulion)
+![](https://komarev.com/ghpvc/?username=aerulion) [![wakatime](https://wakatime.com/badge/user/19c2a3e4-3014-48f7-8f0e-658d94406267.svg)](https://wakatime.com/@19c2a3e4-3014-48f7-8f0e-658d94406267)
+
 👋 Hello there!<br />
 <br />
 My name is @aerulion,<br />
