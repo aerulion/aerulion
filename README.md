@@ -1,3 +1,4 @@
+![](https://komarev.com/ghpvc/?username=aerulion)
 👋 Hello there!<br />
 <br />
 My name is @aerulion,<br />
