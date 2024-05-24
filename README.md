@@ -7,9 +7,9 @@ My name is @aerulion,<br />
 I’m 25 years old and an java developer from Germany.<br />
 <br />
 I love working with Java and SQL, and I’m very interested in Minecraft / Spigot plugin development.<br />
-I’m currently a developer at a small German Minecraft server called [Corpium](https://corpium.net). My main project is the development of a custom item system which introduces many new gameplay elements to the game, as well as an advanced storage system to keep up with large amounts of items.<br />
+I’m currently the lead developer at a small German Minecraft server called [Corpium](https://corpium.net). My main project is the development of Erenos, a plugin handling nearly the entire custom gameplay of the server. It introduces many new gameplay elements like custom items, an advanced storage system to keep up with large amounts of items and much more, all pushing the limits on whats possible in vanilla Minecraft.<br />
 <br />
-📫 If you want to get in contact, send me an email or contact me on Discord ([aerulion#7777](https://discordapp.com/users/173559442040684545))<br />
+📫 If you want to get in contact, send me an email or contact me on Discord ([@aerulion](https://discordapp.com/users/173559442040684545))<br />
 
 ### Skills
 
