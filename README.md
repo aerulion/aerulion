@@ -23,5 +23,5 @@ I’m currently the lead developer at a small German Minecraft server called [Co
 <div align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=aerulion&card_width=400&show_icons=true&include_all_commits=true&count_private=true&locale=en&hide_border=true&text_color=DDDDDD&title_color=FFBD24&icon_color=FFBD24&bg_color=030B15&disable_animations=true" alt="stats graph" />
   <img src="https://github-readme-streak-stats-two-ashy.vercel.app?user=aerulion&card_width=400&hide_border=true&border_radius=5&mode=weekly&ring=FFBD24&background=030B15&fire=FFBD24&dates=DDDDDD&sideNums=DDDDDD&currStreakNum=DDDDDD&stroke=DDDDDD&sideLabels=FFBD24&currStreakLabel=FFBD24&disable_animations=true" alt="streak graph" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=aerulion&locale=en&layout=compact&card_width=800&langs_count=6&hide_border=true&text_color=DDDDDD&title_color=DDDDDD&icon_color=FFBD24&bg_color=030B15&disable_animations=true" alt="languages graph"  />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=aerulion&locale=en&layout=compact&card_width=846&langs_count=6&hide_border=true&text_color=DDDDDD&title_color=DDDDDD&icon_color=FFBD24&bg_color=030B15&disable_animations=true" alt="languages graph"  />
 </div>
