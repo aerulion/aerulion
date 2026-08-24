@@ -55,15 +55,17 @@ const main = async () => {
     const year = contributions.days.slice(-365).reduce((sum, [, c]) => sum + c, 0);
     const synced = new Date().toISOString().slice(0, 10);
 
-    written.push(...bothThemes('stats', (theme) => stats(theme, {...profile, commits: contributions.commits, synced})));
+    written.push(
+        ...bothThemes('stats', (theme) => stats(theme, {
+            ...profile,
+            contributions: contributions.contributions,
+            synced
+        }))
+    );
     written.push(...bothThemes('languages', (theme) => languages(theme, mix)));
     written.push(
         ...bothThemes('activity', (theme) =>
-            activity(theme, {
-                days: contributions.days,
-                contributions: {year, total: contributions.contributions},
-                streak
-            })
+            activity(theme, {days: contributions.days, contributions: {year}, streak})
         )
     );
 
@@ -77,7 +79,7 @@ const main = async () => {
 
     console.log(written.join('\n'));
     console.log(
-        `\n${LOGIN}: ${contributions.commits} commits, ${profile.repoCount} repos, ${profile.stars} stars, ` +
+        `\n${LOGIN}: ${contributions.contributions} contributions, ${profile.repoCount} repos, ${profile.stars} stars, ` +
         `streak ${streak.current}/${streak.longest}, top language ${mix[0]?.name ?? 'n/a'}`
     );
 };

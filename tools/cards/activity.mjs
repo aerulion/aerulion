@@ -81,7 +81,7 @@ export const activity = (theme, {days, contributions, streak}) => {
         ['Current streak', `${streak.current} d`],
         ['Longest streak', `${streak.longest} d`],
         ['Year total', String(contributions.year)],
-        ['All time', String(contributions.total)]
+        ['Best day', String(peak)]
     ];
 
     out += rule(statX - 28, 74, statX - 28, 206, {ink, dash: '1 5'});

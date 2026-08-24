@@ -15,9 +15,12 @@ Output lands in `assets/` as `<card>-dark.svg` and `<card>-light.svg`. The READM
 
 ## Tokens
 
-`GITHUB_TOKEN` covers the public numbers. Private commits, private repositories and their languages only appear for a
-token that belongs to the account — set a classic PAT with `read:user` as the `GH_STATS_TOKEN` secret and the workflow
-will prefer it. WakaTime needs no key; it draws the stats the profile already shares publicly.
+Contribution totals, the calendar and both streaks come from the contribution graph and read the same for any token.
+
+Repository count, stars, pull requests and the language mix cover only what the token can see. `GITHUB_TOKEN` reaches
+public repositories; a classic PAT with the `repo` scope, set as the `GH_STATS_TOKEN` secret, also reaches private ones.
+
+WakaTime needs no key.
 
 ## Layout
 

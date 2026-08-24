@@ -42,8 +42,6 @@ const YEAR = `
 query($login:String!,$from:DateTime!,$to:DateTime!){
   user(login:$login){
     contributionsCollection(from:$from,to:$to){
-      totalCommitContributions
-      restrictedContributionsCount
       contributionCalendar{
         totalContributions
         weeks{contributionDays{date contributionCount}}
@@ -84,7 +82,6 @@ export const fetchContributions = async (token, login, createdAt) => {
     const start = new Date(createdAt);
     const now = new Date();
     const days = new Map();
-    let commits = 0;
     let contributions = 0;
 
     for (let year = start.getUTCFullYear(); year <= now.getUTCFullYear(); year++) {
@@ -97,14 +94,13 @@ export const fetchContributions = async (token, login, createdAt) => {
         });
 
         const c = user.contributionsCollection;
-        commits += c.totalCommitContributions + c.restrictedContributionsCount;
         contributions += c.contributionCalendar.totalContributions;
         for (const week of c.contributionCalendar.weeks) {
             for (const day of week.contributionDays) days.set(day.date, day.contributionCount);
         }
     }
 
-    return {commits, contributions, days: [...days].sort(([a], [b]) => a.localeCompare(b))};
+    return {contributions, days: [...days].sort(([a], [b]) => a.localeCompare(b))};
 };
 
 export const languageTotals = (repos, {exclude = []} = {}) => {

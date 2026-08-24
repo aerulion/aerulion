@@ -21,8 +21,8 @@ export const stats = (theme, data) => {
     out += rule(inner + 84, 44, railEnd - 68, 44, {ink});
     out += monoLabel(railEnd, 48, '01 / 04', {ink, size: 10, anchor: 'end'});
 
-    out += heading(inner - 2, 104, groupDigits(data.commits), {ink, size: 46});
-    out += monoLabel(inner, 124, 'Commits, all time', {ink, size: 10});
+    out += heading(inner - 2, 104, groupDigits(data.contributions), {ink, size: 46});
+    out += monoLabel(inner, 124, 'Contributions, all time', {ink, size: 10});
     out += rule(inner, 142, railEnd, 142, {ink});
 
     const rows = [
@@ -52,7 +52,7 @@ export const stats = (theme, data) => {
         body: out,
         title: 'GitHub telemetry',
         desc:
-            `${groupDigits(data.commits)} commits all time, ${data.repoCount} repositories, ` +
+            `${groupDigits(data.contributions)} contributions all time, ${data.repoCount} repositories, ` +
             `${data.stars} stars, ${data.pullRequests} pull requests, ${data.followers} followers.`
     });
 };

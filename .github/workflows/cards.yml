@@ -1,5 +1,5 @@
-# GITHUB_TOKEN covers the public numbers. To count private work as well, add a
-# classic PAT with the read:user scope as the GH_STATS_TOKEN secret.
+# GITHUB_TOKEN reaches public repositories. A classic PAT with the repo scope,
+# set as GH_STATS_TOKEN, also reaches private ones.
 
 name: 📊 Cards
 
