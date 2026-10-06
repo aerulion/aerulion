@@ -10,8 +10,7 @@ import {THEMES} from './lib/poster.mjs';
 import {fetchContributions, fetchProfile, languageTotals, streaks} from './lib/github.mjs';
 import {fetchWakatime} from './lib/wakatime.mjs';
 import {banner} from './cards/banner.mjs';
-import {stats} from './cards/stats.mjs';
-import {languages} from './cards/languages.mjs';
+import {telemetry} from './cards/telemetry.mjs';
 import {activity} from './cards/activity.mjs';
 import {wakatime} from './cards/wakatime.mjs';
 
@@ -56,13 +55,10 @@ const main = async () => {
     const synced = new Date().toISOString().slice(0, 10);
 
     written.push(
-        ...bothThemes('stats', (theme) => stats(theme, {
-            ...profile,
-            contributions: contributions.contributions,
-            synced
-        }))
+        ...bothThemes('telemetry', (theme) =>
+            telemetry(theme, {...profile, contributions: contributions.contributions, synced}, mix)
+        )
     );
-    written.push(...bothThemes('languages', (theme) => languages(theme, mix)));
     written.push(
         ...bothThemes('activity', (theme) =>
             activity(theme, {days: contributions.days, contributions: {year}, streak})

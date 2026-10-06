@@ -1,11 +1,14 @@
 import {fontFaces} from '../lib/fonts.mjs';
-import {heading, monoLabel, monoValue, panel, round, rule, svg} from '../lib/poster.mjs';
+import {groupDigits} from './telemetry.mjs';
+import {heading, labelWidth, monoLabel, monoValue, panel, round, rule, sectionRail, svg} from '../lib/poster.mjs';
 
 const W = 1200;
 const H = 268;
-const CELL = 13;
-const GAP = 3;
+const CELL = 12;
+const GAP = 4;
 const WEEKS = 53;
+// Mark side by level, off the spacing ramp. Area carries the count, never opacity.
+const SIDE = [0, 4, 6, 8, 12];
 
 const level = (count, peak) => {
     if (count <= 0) return 0;
@@ -16,22 +19,19 @@ const level = (count, peak) => {
     return 1;
 };
 
+// An empty day is a single node, the way the lattice marks a vertex.
+const emptyCell = (x, y, ink) => `<rect x="${x + CELL / 2 - 0.5}" y="${y + CELL / 2 - 0.5}" width="1" height="1" fill="${ink}"/>`;
+
 const emptyGrid = (id, x, y, ink) =>
     `<pattern id="${id}" x="${x}" y="${y}" width="${CELL + GAP}" height="${CELL + GAP}" patternUnits="userSpaceOnUse">` +
-    `<rect x="0" y="0" width="${CELL}" height="${CELL}" fill="none" stroke="${ink}" stroke-width="0.5" stroke-dasharray="1 3"/>` +
+    emptyCell(0, 0, ink) +
     `</pattern>`;
 
 const mark = (x, y, lvl, ink) => {
     if (lvl <= 0) return '';
-    if (lvl === 4) return `<rect x="${x}" y="${y}" width="${CELL}" height="${CELL}" fill="${ink}"/>`;
-    const size = [0, CELL * 0.3, CELL * 0.55, CELL * 0.8][lvl];
-    const off = round((CELL - size) / 2);
-    return `<rect x="${round(x + off)}" y="${round(y + off)}" width="${round(size)}" height="${round(size)}" fill="${ink}"/>`;
+    const off = (CELL - SIDE[lvl]) / 2;
+    return `<rect x="${round(x + off)}" y="${round(y + off)}" width="${SIDE[lvl]}" height="${SIDE[lvl]}" fill="${ink}"/>`;
 };
-
-const legendCell = (x, y, lvl, ink) =>
-    `<rect x="${x}" y="${y}" width="${CELL}" height="${CELL}" fill="none" stroke="${ink}" stroke-width="0.5" stroke-dasharray="1 3"/>` +
-    mark(x, y, lvl, ink);
 
 export const activity = (theme, {days, contributions, streak}) => {
     const {ink} = theme;
@@ -39,7 +39,7 @@ export const activity = (theme, {days, contributions, streak}) => {
     const py = 12;
     const pw = W - px * 2;
     const ph = H - py * 2;
-    const inner = px + 26;
+    const inner = px + 24;
     const railEnd = W - inner;
 
     const today = new Date(`${days.at(-1)?.[0] ?? new Date().toISOString().slice(0, 10)}T00:00:00Z`);
@@ -50,56 +50,59 @@ export const activity = (theme, {days, contributions, streak}) => {
     const peak = recent.reduce((m, [, c]) => Math.max(m, c), 0);
 
     const gridX = inner;
-    const gridY = 90;
+    const gridY = 88;
     const gridW = WEEKS * (CELL + GAP) - GAP;
 
     const grid = recent
         .map((day) => {
             const cell = cellOf(day);
             return mark(
-                round(gridX + Math.floor(cell / 7) * (CELL + GAP)),
-                round(gridY + (cell % 7) * (CELL + GAP)),
+                gridX + Math.floor(cell / 7) * (CELL + GAP),
+                gridY + (cell % 7) * (CELL + GAP),
                 level(day[1], peak),
                 ink
             );
         })
         .join('');
 
-    const statX = gridX + gridW + 56;
+    const statX = gridX + gridW + 48;
 
     let out = panel(px, py, pw, ph, {ink});
 
-    out += monoLabel(inner, 48, 'Cadence', {ink, size: 10});
-    out += rule(inner + 74, 44, railEnd - 68, 44, {ink});
-    out += monoLabel(railEnd, 48, '03 / 04', {ink, size: 10, anchor: 'end'});
+    out += sectionRail(inner, railEnd, 48, 'Cadence', '03 / 04', {ink});
 
-    out += monoLabel(inner, 74, 'Contributions / last 12 months', {ink, size: 9});
+    out += monoLabel(inner, 72, 'Contributions / last 12 months', {ink});
     out += `<rect x="${gridX}" y="${gridY}" width="${gridW}" height="${7 * (CELL + GAP) - GAP}" fill="url(#cellGrid)"/>`;
     out += grid;
 
     const stats = [
         ['Current streak', `${streak.current} d`],
         ['Longest streak', `${streak.longest} d`],
-        ['Year total', String(contributions.year)],
-        ['Best day', String(peak)]
+        ['Year total', groupDigits(contributions.year)],
+        ['Best day', groupDigits(peak)]
     ];
 
-    out += rule(statX - 28, 74, statX - 28, 206, {ink, dash: '1 5'});
-    out += heading(statX, 96, 'Signal', {ink, size: 22});
+    out += rule(statX - 24, 64, statX - 24, 208, {ink});
+    out += heading(statX, 96, 'Signal', {ink, size: 20});
     stats.forEach(([label, value], i) => {
-        const y = 128 + i * 26;
-        out += monoLabel(statX, y, label, {ink, size: 10});
-        out += monoValue(railEnd, y, value, {ink, size: 14, weight: 600, anchor: 'end'});
-        out += rule(statX, y + 7, railEnd, y + 7, {ink, dash: '1 4'});
+        const y = 128 + i * 24;
+        out += monoLabel(statX, y, label, {ink});
+        out += monoValue(railEnd, y, value, {ink, anchor: 'end'});
+        out += rule(statX, y + 8, railEnd, y + 8, {ink});
     });
 
-    const legendY = 218;
-    out += monoLabel(inner, legendY + 11, 'Less', {ink, size: 9});
-    for (let i = 0; i < 5; i++) out += legendCell(round(inner + 42 + i * (CELL + GAP)), legendY, i, ink);
-    out += monoLabel(inner + 42 + 5 * (CELL + GAP) + 8, legendY + 11, 'More', {ink, size: 9});
-    out += monoLabel(inner + 200, legendY + 11, 'Area, not opacity', {ink, size: 9});
+    out += rule(inner, 208, statX - 24, 208, {ink});
 
-    out += rule(inner, 206, statX - 28, 206, {ink});
+    const legendY = H - 28 - 11;
+    const cellsX = inner + labelWidth('Less') + 8;
+    out += monoLabel(inner, legendY + 11, 'Less', {ink});
+    for (let i = 0; i < SIDE.length; i++) {
+        const x = cellsX + i * (CELL + GAP);
+        out += emptyCell(x, legendY, ink) + mark(x, legendY, i, ink);
+    }
+    const moreX = cellsX + SIDE.length * (CELL + GAP) + 4;
+    out += monoLabel(moreX, legendY + 11, 'More', {ink});
+    out += monoLabel(moreX + labelWidth('More') + 48, legendY + 11, 'Area, not opacity', {ink});
 
     return svg({
         width: W,

@@ -7,10 +7,9 @@ const FONT_DIR = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'asse
 
 const FACES = {
     tektur: {file: 'tektur-700.woff2', family: 'Tektur', weight: 700},
-    chakra: {file: 'chakra-700.woff2', family: 'Chakra Petch', weight: 700},
+    chakra: {file: 'chakra-600.woff2', family: 'Chakra Petch', weight: 600},
     grotesk: {file: 'grotesk-400.woff2', family: 'Space Grotesk', weight: 400},
-    mono: {file: 'plexmono-400.woff2', family: 'IBM Plex Mono', weight: 400},
-    monoBold: {file: 'plexmono-600.woff2', family: 'IBM Plex Mono', weight: 600}
+    mono: {file: 'plexmono-400.woff2', family: 'IBM Plex Mono', weight: 400}
 };
 
 const cache = new Map();

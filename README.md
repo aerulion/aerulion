@@ -30,28 +30,13 @@ Everything else lives at **[aerulion.net](https://aerulion.net)**.
 
 <div align="center">
 
-<table>
-<tr>
-<td width="50%">
-
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/stats-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/stats-light.svg">
-  <img alt="GitHub telemetry" src="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/stats-dark.svg" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/telemetry-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/telemetry-light.svg">
+  <img alt="GitHub telemetry and language mix" src="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/telemetry-dark.svg" width="100%">
 </picture>
 
-</td>
-<td width="50%">
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/languages-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/languages-light.svg">
-  <img alt="Language mix" src="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/languages-dark.svg" width="100%">
-</picture>
-
-</td>
-</tr>
-</table>
+<br>
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/aerulion/aerulion/main/assets/activity-dark.svg">
